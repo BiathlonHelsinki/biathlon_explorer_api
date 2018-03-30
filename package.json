@@ -1,0 +1,38 @@
+{
+  "name": "biathlon-status",
+  "version": "0.0.1",
+  "main": "./app.js",
+  "private": true,
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha --full-trace -b --exit test/index.js",
+    "dev": "nodemon --trace-warnings",
+    "debug": "nodemon --inspect"
+  },
+  "author": "John W. Fail <john@ptarmigan.fi>",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.4.1",
+    "body-parser": "~1.13.2",
+    "chai": "~1.8.1",
+    "connect-flash": "^0.1.1",
+    "cookie-session": "2.0.0-beta.3",
+    "debug": "~2.2.0",
+    "express": "4.16.2",
+    "hamljs": "0.6.2",
+    "helmet": "3.10.0",
+    "lodash": "4.17.4",
+    "method-override": "2.3.10",
+    "mocha": "~1.14.0",
+    "morgan": "~1.6.1",
+    "node-yaml-config": "0.0.4",
+    "pg-hstore": "2.3.2",
+    "pg-promise": "^5.0.5",
+    "should": "~2.1.0",
+    "web3_ipc": "1.4.0"
+  },
+  "devDependencies": {
+    "chai": "4.1.2",
+    "chai-http": "3.0.0",
+    "mocha": "^5.0.0"
+  }
+}
