@@ -25,6 +25,7 @@
     "mocha": "~1.14.0",
     "morgan": "~1.6.1",
     "node-yaml-config": "0.0.4",
+    "pm2": "2.10.2",
     "pg-hstore": "2.3.2",
     "pg-promise": "^5.0.5",
     "should": "~2.1.0",
