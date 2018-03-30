@@ -61,4 +61,4 @@ config.yaml
 config/deploy
 config/deploy.rb
 config/deploy/*
-Capfile
+
