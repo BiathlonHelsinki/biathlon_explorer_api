@@ -9,6 +9,11 @@ const morgan = require("morgan");
 const syncer = require("./middlewares/syncing")
 const biathlon = require("./middlewares/biathlon")
 const routes = require('./config/routes')
+const https = require('https');
+const http = require('http');
+const privateKey  = config.private_key
+const certificate = config.sslcert
+const sslOptions = {}
 
 const initOptions = {
     promiseLib: promise
@@ -45,6 +50,13 @@ class App {
 
     if (process.env.NODE_ENV === "development") {
       this.app.use(morgan("dev")); // log every request to the console
+      http.createServer(this.app).listen(8000);
+    } else {
+      sslOptions.key= fs.readFileSync(privateKey, 'utf8')
+      sslOptions.cert = fs.readFileSync(certificate, 'utf8')
+
+      https.createServer(sslOptions, this.app).listen(process.env.PORT)
+
     }
     this.app.use(function (req, res, next) {
 

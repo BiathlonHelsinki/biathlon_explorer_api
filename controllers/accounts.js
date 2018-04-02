@@ -67,8 +67,11 @@ class Accounts {
     let pgt = await this.app.db.any('SELECT * from ethtransactions WHERE txaddress = ${hash}', {hash: tx.transactionHash})
 
     if (pgt[0]) {
+      console.log(util.inspect(pgt))
       let has_activity = await this.app.db.any('SELECT * from activities WHERE ethtransaction_id = ${eid}', {eid: pgt[0].id})
+    
       if (has_activity[0]) {
+          console.log(has_activity[0].item_type)
         if (has_activity[0].item_type == 'Instance') {
           let pgi = await this.app.db.any("SELECT i.open_time, i.id, i.slug, e.image, e.id as event_id, 'event' as image_class, it.name from instances i, events e, instance_translations it WHERE i.id = it.instance_id and it.locale = 'en' and i.event_id = e.id and i.id = ${instance_id}", {instance_id: has_activity[0].item_id })
           if (pgi[0]) {
@@ -80,6 +83,7 @@ class Accounts {
           }
         }
         else if (has_activity[0].item_type == 'Idea') {
+
           let pgi = await this.app.db.any("SELECT name, id, image, 'idea' as image_class, id as event_id FROM ideas WHERE id = ${idea_id}", {idea_id: has_activity[0].item_id})
           if (pgi[0]) {
 
@@ -105,6 +109,7 @@ class Accounts {
         tx.kp.when = has_activity[0].created_at    
       } 
       else {
+        console.log(util.inspect(tx.transactionHash))
         tx.kp = {"error" : 'no activity found ' }
       }
     } 
