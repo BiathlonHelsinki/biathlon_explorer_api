@@ -1,4 +1,3 @@
-const haml = require('hamljs')
 const fs = require('fs')
 const config = require('node-yaml-config').load('./config.yaml');
 const express = require('express')
