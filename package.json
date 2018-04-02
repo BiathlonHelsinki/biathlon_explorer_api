@@ -18,7 +18,6 @@
     "cookie-session": "2.0.0-beta.3",
     "debug": "~2.2.0",
     "express": "4.16.2",
-    "hamljs": "0.6.2",
     "helmet": "3.10.0",
     "lodash": "4.17.4",
     "method-override": "2.3.10",
