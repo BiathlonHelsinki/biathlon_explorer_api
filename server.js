@@ -49,13 +49,16 @@ class App {
 
     if (process.env.NODE_ENV === "development") {
       this.app.use(morgan("dev")); // log every request to the console
-      http.createServer(this.app).listen(8000);
+      http.createServer(this.app).listen(process.env.PORT, function () {
+        console.log('The server is running in port localhost: ', process.env.PORT);
+      });
     } else {
       sslOptions.key= fs.readFileSync(privateKey, 'utf8')
       sslOptions.cert = fs.readFileSync(certificate, 'utf8')
 
-      https.createServer(sslOptions, this.app).listen(process.env.PORT)
-
+      https.createServer(sslOptions, this.app).listen(process.env.PORT, function () {
+        console.log('The server is running in port localhost: ', process.env.PORT);
+      }) 
     }
     this.app.use(function (req, res, next) {
 
@@ -82,9 +85,7 @@ class App {
 
     new routes.Routes(this.app);
   
-    this.server = this.app.listen(process.env.PORT, function () {
-      console.log('The server is running in port localhost: ', process.env.PORT);
-    });
+
 
     this.app.use(function (err, req, res, next) {
       console.error(err.stack);
