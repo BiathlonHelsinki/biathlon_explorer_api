@@ -50,14 +50,18 @@ class Accounts {
     let get_identity
     if (pgt[0]) {
       
-      if (pgt[0].holder_type == 'User') {
+      if (pgt[0].holder_type == 'User' && pgt[0].holder_id) {
         get_identity = await this.app.db.any('SELECT username, avatar, id, latest_balance, website FROM users WHERE id = ${user_id}', {user_id: pgt[0].holder_id})
         get_identity[0].account_class = 'user'
-      } else {
+        get_identity = get_identity[0]
+      } else if (pgt[0].holder_id) {
         get_identity = await this.app.db.any('SELECT id, name as username, avatar, slug, website, latest_balance FROM groups WHERE id = ${group_id}', {group_id: pgt[0].holder_id})
         get_identity[0].account_class = 'group'
+        get_identity = get_identity[0]
       }
-      get_identity = get_identity[0]
+      else {
+        get_identity = 'deleted account'
+      }
     } 
     return get_identity
 
